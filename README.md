@@ -131,6 +131,14 @@ log:
 sudo tail -f /var/log/mosdns.log
 ```
 
+## Forward request to designated gateways
+
+> [!NOTE]
+> For those who would like to further forward DNS requests to designated gateways, depending on the DNS provider of choice, you may achieve so following the route setting below.  
+
+![CleanShot 2023-09-14 at 22 58 10@2x](https://github.com/techprober/mosdns-opnsense-install/assets/31861128/c681317c-ecd1-43a9-b441-8a56be95f6da)
+
+
 ## Appendix
 
 - Auto generate `geoip.txt`, `geosites.txt` (since `*.dat` are deprecated in v5) - https://github.com/techprober/v2dat
