@@ -23,7 +23,7 @@ Know DNS Providers: <https://adguard-dns.io/kb/general/dns-providers/>
 
 ## Project Owner
 
-CopyRight 2023 @TechProber. All rights reserved.
+Copyright 2023 @TechProber. All rights reserved.
 
 Maintainer: [Kevin Yu (@yqlbu)](https://github.com/yqlbu)
 
@@ -117,7 +117,7 @@ service mosdns status
 ### Check journal logs
 
 > [!IMPORTANT]
-> To write logs to a file, you need to sepcify the log file destination in your config as shown in the follwing:
+> To write logs to a file, you need to specify the log file destination in your config as shown in the following:
 
 ```yaml
 ## -- Log Config -- ##
@@ -131,7 +131,7 @@ log:
 sudo tail -f /var/log/mosdns.log
 ```
 
-## Forward request to designated gateways
+## Forward requests to designated gateways
 
 > [!NOTE]
 > For those who would like to further forward DNS requests to designated gateways, depending on the DNS provider of choice, you may achieve so following the route setting below.  
@@ -141,5 +141,5 @@ sudo tail -f /var/log/mosdns.log
 
 ## Appendix
 
-- Auto generate `geoip.txt`, `geosites.txt` (since `*.dat` are deprecated in v5) - https://github.com/techprober/v2dat
+- Auto-generate `geoip.txt`, `geosites.txt` (since `*.dat` are deprecated in v5) - https://github.com/techprober/v2dat
 - Available Rules - https://github.com/techprober/v2ray-rules-dat/releases
