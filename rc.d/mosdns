@@ -1,0 +1,106 @@
+#!/bin/sh
+#
+# $FreeBSD$
+#
+
+# PROVIDE: mosdns
+# REQUIRE: LOGIN FILESYSTEMS
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="mosdns"
+desc="mosdns daemon"
+rcvar="mosdns_enable"
+
+pidfile="/var/run/mosdns.pid"
+procname="/usr/bin/mosdns"
+
+# Set some default values for your application
+load_rc_config $name
+: ${mosdns_enable=NO}
+: ${mosdns_restart=YES}
+: ${mosdns_command="/usr/bin/mosdns start"}
+: ${mosdns_flags="-c /usr/local/etc/mosdns/config.yml"}
+
+# command="/usr/bin/mosdns"
+# command_args="start -c /usr/local/etc/mosdns/config.yml"
+command="/usr/sbin/daemon"
+command_args="-P ${pidfile} -u root -r -f ${mosdns_command} ${mosdns_flags}"
+
+start_cmd="mosdns_start"
+stop_cmd="mosdns_stop"
+status_cmd="mosdns_status"
+
+check_pidfile() {
+    if [ -e "$pidfile" ]; then
+        pid=$(cat "$pidfile")
+        if [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null; then
+            return 0  # The process is running
+        else
+            return 1  # The pidfile is stale
+        fi
+    else
+        return 2  # The pidfile does not exist
+    fi
+}
+
+mosdns_start() {
+    check_pidfile
+    case $? in
+        0)
+            echo "mosdns is already running with PID $(cat $pidfile)."
+            ;;
+        1)
+            echo "Stale pidfile found. Removing it."
+            rm -f "$pidfile"
+            ;;
+        2)
+            echo "Starting mosdns..."
+            cd /usr/local/etc/mosdns
+            touch cache.dump
+            chown nobody:nogroup cache.dump
+            chmod 0755 cache.dump
+            ${command} ${command_args} &
+            ;;
+    esac
+}
+
+mosdns_stop() {
+    check_pidfile
+    case $? in
+        0)
+            echo "Stopping mosdns..."
+            kill -TERM $(cat $pidfile)
+            rm -f "$pidfile"
+            rm -f /usr/local/etc/mosdns/cache.dump
+            echo "" > /var/log/mosdns.log
+            ;;
+        1)
+            echo "Stale pidfile found. Removing it."
+            rm -f "$pidfile"
+            ;;
+        2)
+            echo "mosdns is not running."
+            ;;
+    esac
+}
+
+mosdns_status() {
+    echo "Checking mosdns status..."
+    echo "PID File: $pidfile"
+
+    if [ -e "$pidfile" ]; then
+        pid=$(cat "$pidfile")
+        if [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null; then
+            echo "mosdns is running with PID $pid."
+        else
+            echo "mosdns is not running, but the PID file exists. Cleaning up stale PID file."
+            rm -f "$pidfile"
+        fi
+    else
+        echo "mosdns is not running."
+    fi
+}
+
+run_rc_command "$1"
