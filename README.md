@@ -93,7 +93,7 @@ sudo chmod +x /usr/local/etc/rc.d/mosdns
 > [!NOTE]
 > You may start with the recommended [config](https://github.com/techprober/mosdns-lxc-deploy/blob/master/mosdns/config-v5.yml), which provides out-of-the-box ip leak prevent feature.
 
-### Enalbe mosdns service
+### Enable mosdns service
 
 ```bash
 echo 'mosdns_enable="YES"' >> /etc/rc.conf
