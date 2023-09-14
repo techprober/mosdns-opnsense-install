@@ -21,6 +21,12 @@ Mosdns Official Wiki: <https://irine-sistiana.gitbook.io/mosdns-wiki/>
 
 Know DNS Providers: <https://adguard-dns.io/kb/general/dns-providers/>
 
+## Project Owner
+
+CopyRight 2023 @TechProber. All rights reserved.
+
+Maintainer: [Kevin Yu (@yqlbu)](https://github.com/yqlbu)
+
 ## Related Projects
 
 - [techprober/mosdns-lxc-deploy](https://github.com/techprober/mosdns-lxc-deploy) - Deploy mosdns in Proxmox LXC Container
