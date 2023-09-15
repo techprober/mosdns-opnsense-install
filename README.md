@@ -175,7 +175,7 @@ The script is available in [./scripts/geodata-update.sh](./scripts/geodata-updat
 Download save it in `/usr/local/etc/mosdns/scripts/`
 
 ```bash
-curl -L -o /usr/local/etc/mosdns/scripts/geodata-update.sh https://github.com/techprober/mosdns-opnsense-install/raw/geodata-update/scripts/geodata-update.sh
+curl -L -o /usr/local/etc/mosdns/scripts/geodata-update.sh https://github.com/techprober/mosdns-opnsense-install/raw/master/scripts/geodata-update.sh
 ```
 
 Set permission
