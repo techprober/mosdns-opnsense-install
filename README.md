@@ -27,6 +27,27 @@ Copyright 2023 @TechProber. All rights reserved.
 
 Maintainer: [Kevin Yu (@yqlbu)](https://github.com/yqlbu)
 
+## Table of contents
+
+- [Related Projects](#related-projects)
+- [Steps to deploy](#steps-to-deploy)
+  - [Preparation](#preparation)
+  - [Download binary from GitHub release page](#download-binary-from-gitHub-release-page)
+  - [Create log file](#download-binary-from-gitHub-release-page)
+  - [Download geodata artifacts](#download-geodata-artifacts)
+  - [Disable Unbound service](#disable-unbound-service)
+  - [Create mosdns rc service](#create-mosdns-rc-service)
+  - [Create mosdns config](#create-mosdns-config)
+  - [Enable mosdns service](#enable-mosdns-service)
+  - [Verify running status](#verify-running-status)
+  - [Check journal logs](#check-journal-logs)
+- [Cronjobs](#Cronjobs)
+  - [Set up cron job to clean up logs](#set-up-cron-job-to-clean-up-logs)
+  - [Add a new cron command available under OPNsense GUI](#add-a-new-cron-command-available-under-opnsense-gui)
+  - [Set up cron job to update geodata artifacts](#set-up-cron-job-to-update-geodata-artifacts)
+- [Forward requests to designated gateways](#forward-requests-to-designated-gateways)
+- [Appendix](#appendix)
+
 ## Related Projects
 
 - [techprober/mosdns-lxc-deploy](https://github.com/techprober/mosdns-lxc-deploy) - Deploy mosdns in Proxmox LXC Container
@@ -217,6 +238,8 @@ Restart and reload
 service configd restart
 configctl mosdns-geodata-update reload
 ```
+
+---
 
 ### Add a new cron command available under OPNsense GUI
 
