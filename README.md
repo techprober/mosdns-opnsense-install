@@ -69,9 +69,8 @@ Artifacts Source: https://github.com/techprober/v2ray-rules-dat/releases
 
 ```bash
 cd /usr/local/etc/mosdns
-LATEST_TAG=$(curl https://api.github.com/repos/techprober/v2ray-rules-dat/releases/latest --silent |  jq -r ".tag_name)
-wget -O ./downloads/geoip.zip https://github.com/techprober/v2ray-rules-dat/releases/download/$LATEST_TAG/geoip.zip
-wget -O ./downloads/geosite.zip https://github.com/techprober/v2ray-rules-dat/releases/download/$LATEST_TAG/geosite.zip
+curl -o ./downloads/geoip.zip https://github.com/techprober/v2ray-rules-dat/raw/release/geoip.zip
+curl -o ./downloads/geosite.zip https://github.com/techprober/v2ray-rules-dat/raw/release/geoip.zip
 unzip ./downloads/geoip.zip -d ./ips/
 unzip ./downloads/geosite.zip -d ./domains/
 ```
