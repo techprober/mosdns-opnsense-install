@@ -68,6 +68,12 @@ Make sure you have the following file structure present on your host:
 5 directories, 2 files
 ```
 
+Install Vim (Optional)
+
+```bash
+sudo pkg install vim
+```
+
 ### Download binary from GitHub release page
 
 https://github.com/IrineSistiana/mosdns/releases
@@ -159,6 +165,50 @@ log:
 ```bash
 sudo tail -f /var/log/mosdns.log
 ```
+
+## Set up cron job to update geodata artifacts
+
+### Add geodata-update script
+
+The script is available in [./scripts/geodata-update.sh](./scripts/geodata-update.sh).
+
+Download save it in `/usr/local/etc/mosdns/scripts/`
+
+```bash
+curl -L -o /usr/local/etc/mosdns/scripts/geodata-update.sh https://github.com/techprober/mosdns-opnsense-install/raw/geodata-update/scripts/geodata-update.sh
+```
+
+Set permission
+
+```bash
+chmod +x /usr/local/etc/mosdns/scripts/geodata-update.sh
+```
+
+### Add a new cron command available under OPNsense GUI
+
+Create a `.conf `file in `/usr/local/opnsense/service/conf/actions.d/` (your file must start with `actions_`)
+`vi /usr/local/opnsense/service/conf/actions.d/actions_mosdns-geodata-update.conf`
+
+```conf
+[reload]
+command:/bin/sh /usr/local/etc/mosdns/scripts/geodata-update.sh
+parameter:
+type:script_output
+message: Mosdns Geodata Update
+description: Centralized Geodata Update for Mosdns DNS Service
+```
+
+Restart and reload
+
+```bash
+service configd restart
+configctl mosdns-geodata-update reload
+```
+
+### Add a cron job
+
+Go to `System` > `Settings` > `Cron` and `Add a Job`
+You can show your cron command in dropdown Command. Plan your cron schedule as you wish.
 
 ## Forward requests to designated gateways
 
