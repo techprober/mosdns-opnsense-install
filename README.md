@@ -37,11 +37,41 @@ Maintainer: [Kevin Yu (@yqlbu)](https://github.com/yqlbu)
 
 ## Steps to deploy
 
-### Create dirs
+### Preparation
+
+Create a new directory for mosdns
+
+```bash
+mkdir -p /etc/usr/local/mosdns
+```
+
+Create sub directories
 
 ```bash
 mkdir -p /usr/local/etc/mosdns/{ips,domains,downloads,custom}
 touch /usr/local/etc/mosdns/cache.dump
+```
+
+Make sure you have the following file structure present on your host:
+
+```
+# /usr/local/etc/mosdns
+./
+|-- cache.dump
+|-- config.yml
+|-- custom
+|-- domains
+|-- downloads
+|-- scripts
+`-- ips
+
+5 directories, 2 files
+```
+
+Install Vim (Optional)
+
+```bash
+sudo pkg install vim
 ```
 
 ### Download binary from GitHub release page
@@ -67,13 +97,19 @@ Reference: https://github.com/techprober/mosdns-lxc-deploy
 
 Artifacts Source: https://github.com/techprober/v2ray-rules-dat/releases
 
+> [!NOTE]
+> You may selectively download the rule lists you need from the [release branch](https://github.com/techprober/v2ray-rules-dat/tree/release) from [@techprober/v2ray-rules-dat](https://github.com/techprober/v2ray-rules-dat/releases).
+
 ```bash
 cd /usr/local/etc/mosdns
-curl -o ./downloads/geoip.zip https://github.com/techprober/v2ray-rules-dat/raw/release/geoip.zip
-curl -o ./downloads/geosite.zip https://github.com/techprober/v2ray-rules-dat/raw/release/geoip.zip
-unzip ./downloads/geoip.zip -d ./ips/
-unzip ./downloads/geosite.zip -d ./domains/
+curl --progress-bar -JL -o $MOSDNS_PATH/downloads/geoip.zip https://github.com/techprober/v2ray-rules-dat/raw/release/geoip.zip
+curl --progress-bar -JL -o $MOSDNS_PATH/downloads/geosite.zip https://github.com/techprober/v2ray-rules-dat/raw/release/geosite.zip
+unzip -o $MOSDNS_PATH/downloads/geoip.zip -d $MOSDNS_PATH/ips
+unzip -o $MOSDNS_PATH/downloads/geosite.zip -d $MOSDNS_PATH/domains
 ```
+
+> [!NOTE]
+> Alternatively, you may use a dedicated script to automatically download and extract the geodata artifacts. See [./scripts/geodata-update.sh](./scripts/geodata-update.sh)
 
 ### Disable Unbound service
 
@@ -130,13 +166,58 @@ log:
 sudo tail -f /var/log/mosdns.log
 ```
 
+## Set up cron job to update geodata artifacts
+
+### Add geodata-update script
+
+The script is available in [./scripts/geodata-update.sh](./scripts/geodata-update.sh).
+
+Download save it in `/usr/local/etc/mosdns/scripts/`
+
+```bash
+curl -L -o /usr/local/etc/mosdns/scripts/geodata-update.sh https://github.com/techprober/mosdns-opnsense-install/raw/geodata-update/scripts/geodata-update.sh
+```
+
+Set permission
+
+```bash
+chmod +x /usr/local/etc/mosdns/scripts/geodata-update.sh
+```
+
+### Add a new cron command available under OPNsense GUI
+
+Create a `.conf `file in `/usr/local/opnsense/service/conf/actions.d/` (your file must start with `actions_`)
+`vi /usr/local/opnsense/service/conf/actions.d/actions_mosdns-geodata-update.conf`
+
+```conf
+[reload]
+command:/bin/sh /usr/local/etc/mosdns/scripts/geodata-update.sh
+parameter:
+type:script_output
+message: Mosdns Geodata Update
+description: Centralized Geodata Update for Mosdns DNS Service
+```
+
+Restart and reload
+
+```bash
+service configd restart
+configctl mosdns-geodata-update reload
+```
+
+### Add a cron job
+
+Go to `System` > `Settings` > `Cron` and `Add a Job`
+You can show your cron command in dropdown Command. Plan your cron schedule as you wish.
+
+<img width="1661" alt="image" src="https://github.com/techprober/mosdns-opnsense-install/assets/31861128/cb586f5a-b8cd-416e-a078-e14642d7de42">
+
 ## Forward requests to designated gateways
 
 > [!NOTE]
-> For those who would like to further forward DNS requests to designated gateways, depending on the DNS provider of choice, you may achieve so following the route setting below.  
+> For those who would like to further forward DNS requests to designated gateways, depending on the DNS provider of choice, you may achieve so following the route setting below.
 
 ![CleanShot 2023-09-14 at 22 58 10@2x](https://github.com/techprober/mosdns-opnsense-install/assets/31861128/c681317c-ecd1-43a9-b441-8a56be95f6da)
-
 
 ## Appendix
 
