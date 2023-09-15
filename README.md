@@ -37,11 +37,35 @@ Maintainer: [Kevin Yu (@yqlbu)](https://github.com/yqlbu)
 
 ## Steps to deploy
 
-### Create dirs
+### Preparation
+
+Create a new directory for mosdns
+
+```bash
+mkdir -p /etc/usr/local/mosdns
+```
+
+Create sub directories
 
 ```bash
 mkdir -p /usr/local/etc/mosdns/{ips,domains,downloads,custom}
 touch /usr/local/etc/mosdns/cache.dump
+```
+
+Make sure you have the following file structure present on your host:
+
+```
+# /usr/local/etc/mosdns
+./
+|-- cache.dump
+|-- config.yml
+|-- custom
+|-- domains
+|-- downloads
+|-- scripts
+`-- ips
+
+5 directories, 2 files
 ```
 
 ### Download binary from GitHub release page
@@ -67,13 +91,19 @@ Reference: https://github.com/techprober/mosdns-lxc-deploy
 
 Artifacts Source: https://github.com/techprober/v2ray-rules-dat/releases
 
+> [!NOTE]
+> You may selectively download the rule lists you need from the [release branch](https://github.com/techprober/v2ray-rules-dat/tree/release) from [@techprober/v2ray-rules-dat](https://github.com/techprober/v2ray-rules-dat/releases).
+
 ```bash
 cd /usr/local/etc/mosdns
-curl -o ./downloads/geoip.zip https://github.com/techprober/v2ray-rules-dat/raw/release/geoip.zip
-curl -o ./downloads/geosite.zip https://github.com/techprober/v2ray-rules-dat/raw/release/geoip.zip
-unzip ./downloads/geoip.zip -d ./ips/
-unzip ./downloads/geosite.zip -d ./domains/
+curl --progress-bar -JL -o $MOSDNS_PATH/downloads/geoip.zip https://github.com/techprober/v2ray-rules-dat/raw/release/geoip.zip
+curl --progress-bar -JL -o $MOSDNS_PATH/downloads/geosite.zip https://github.com/techprober/v2ray-rules-dat/raw/release/geosite.zip
+unzip -o $MOSDNS_PATH/downloads/geoip.zip -d $MOSDNS_PATH/ips
+unzip -o $MOSDNS_PATH/downloads/geosite.zip -d $MOSDNS_PATH/domains
 ```
+
+> [!NOTE]
+> Alternatively, you may use a dedicated script to automatically download and extract the geodata artifacts. See [./scripts/geodata-update.sh](./scripts/geodata-update.sh)
 
 ### Disable Unbound service
 
@@ -133,10 +163,9 @@ sudo tail -f /var/log/mosdns.log
 ## Forward requests to designated gateways
 
 > [!NOTE]
-> For those who would like to further forward DNS requests to designated gateways, depending on the DNS provider of choice, you may achieve so following the route setting below.  
+> For those who would like to further forward DNS requests to designated gateways, depending on the DNS provider of choice, you may achieve so following the route setting below.
 
 ![CleanShot 2023-09-14 at 22 58 10@2x](https://github.com/techprober/mosdns-opnsense-install/assets/31861128/c681317c-ecd1-43a9-b441-8a56be95f6da)
-
 
 ## Appendix
 
