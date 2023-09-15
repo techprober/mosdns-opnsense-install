@@ -129,7 +129,7 @@ Artifacts Source: https://github.com/techprober/v2ray-rules-dat/releases
 > You may selectively download the rule lists you need from the [release branch](https://github.com/techprober/v2ray-rules-dat/tree/release) from [@techprober/v2ray-rules-dat](https://github.com/techprober/v2ray-rules-dat/releases).
 
 ```bash
-cd /usr/local/etc/mosdns
+export MOSDNS_PATH=/usr/local/etc/mosdns
 curl --progress-bar -JL -o $MOSDNS_PATH/downloads/geoip.zip https://github.com/techprober/v2ray-rules-dat/raw/release/geoip.zip
 curl --progress-bar -JL -o $MOSDNS_PATH/downloads/geosite.zip https://github.com/techprober/v2ray-rules-dat/raw/release/geosite.zip
 unzip -o $MOSDNS_PATH/downloads/geoip.zip -d $MOSDNS_PATH/ips
