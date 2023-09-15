@@ -210,6 +210,8 @@ configctl mosdns-geodata-update reload
 Go to `System` > `Settings` > `Cron` and `Add a Job`
 You can show your cron command in dropdown Command. Plan your cron schedule as you wish.
 
+<img width="1661" alt="image" src="https://github.com/techprober/mosdns-opnsense-install/assets/31861128/cb586f5a-b8cd-416e-a078-e14642d7de42">
+
 ## Forward requests to designated gateways
 
 > [!NOTE]
