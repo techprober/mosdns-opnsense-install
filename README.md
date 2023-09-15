@@ -166,9 +166,29 @@ log:
 sudo tail -f /var/log/mosdns.log
 ```
 
-## Set up cron job to update geodata artifacts
+## Cronjobs
 
-### Add geodata-update script
+### Set up cron job to clean up logs
+
+#### Create cron action
+
+Create a `.conf `file in `/usr/local/opnsense/service/conf/actions.d/` (your file must start with `actions_`)
+`vi /usr/local/opnsense/service/conf/actions.d/actions_mosdns-logs-cleanup.conf`
+
+Available in [./actions.d/actions_mosdns-logs-cleanup.conf](./actions.d/actions_mosdns-logs-cleanup.conf)
+
+Restart and reload
+
+```bash
+service configd restart
+configctl mosdns-logs-cleanup reload
+```
+
+---
+
+### Set up cron job to update geodata artifacts
+
+#### Add geodata-update script
 
 The script is available in [./scripts/geodata-update.sh](./scripts/geodata-update.sh).
 
@@ -184,19 +204,12 @@ Set permission
 chmod +x /usr/local/etc/mosdns/scripts/geodata-update.sh
 ```
 
-### Add a new cron command available under OPNsense GUI
+#### Create cron action
 
 Create a `.conf `file in `/usr/local/opnsense/service/conf/actions.d/` (your file must start with `actions_`)
 `vi /usr/local/opnsense/service/conf/actions.d/actions_mosdns-geodata-update.conf`
 
-```conf
-[reload]
-command:/bin/sh /usr/local/etc/mosdns/scripts/geodata-update.sh
-parameter:
-type:script_output
-message: Mosdns Geodata Update
-description: Centralized Geodata Update for Mosdns DNS Service
-```
+Available in [./actions.d/actions_mosdns-logs-cleanup.conf](./actions.d/actions_mosdns-logs-cleanup.conf)
 
 Restart and reload
 
@@ -205,7 +218,7 @@ service configd restart
 configctl mosdns-geodata-update reload
 ```
 
-### Add a cron job
+### Add a new cron command available under OPNsense GUI
 
 Go to `System` > `Settings` > `Cron` and `Add a Job`
 You can show your cron command in dropdown Command. Plan your cron schedule as you wish.
