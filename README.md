@@ -29,24 +29,31 @@ Maintainer: [Kevin Yu (@yqlbu)](https://github.com/yqlbu)
 
 ## Table of contents
 
-- [Related Projects](#related-projects)
-- [Steps to deploy](#steps-to-deploy)
-  - [Preparation](#preparation)
-  - [Download binary from GitHub release page](#download-binary-from-gitHub-release-page)
-  - [Create log file](#download-binary-from-gitHub-release-page)
-  - [Download geodata artifacts](#download-geodata-artifacts)
-  - [Disable Unbound service](#disable-unbound-service)
-  - [Create mosdns rc service](#create-mosdns-rc-service)
-  - [Create mosdns config](#create-mosdns-config)
-  - [Enable mosdns service](#enable-mosdns-service)
-  - [Verify running status](#verify-running-status)
-  - [Check journal logs](#check-journal-logs)
-- [Cronjobs](#Cronjobs)
-  - [Set up cron job to clean up logs](#set-up-cron-job-to-clean-up-logs)
-  - [Set up cron job to update geodata artifacts](#set-up-cron-job-to-update-geodata-artifacts)
-  - [Add a new cron command available under OPNsense GUI](#add-a-new-cron-command-available-under-opnsense-gui)
-- [Forward requests to designated gateways](#forward-requests-to-designated-gateways)
-- [Appendix](#appendix)
+<!-- vim-markdown-toc GFM -->
+
+* [Related Projects](#related-projects)
+* [Steps to deploy](#steps-to-deploy)
+  * [Preparation](#preparation)
+  * [Download binary from GitHub release page](#download-binary-from-github-release-page)
+  * [Create log file](#create-log-file)
+  * [Download geodata artifacts](#download-geodata-artifacts)
+  * [Disable Unbound service](#disable-unbound-service)
+  * [Create mosdns rc service](#create-mosdns-rc-service)
+  * [Create mosdns config](#create-mosdns-config)
+  * [Enable mosdns service](#enable-mosdns-service)
+  * [Verify running status](#verify-running-status)
+  * [Check journal logs](#check-journal-logs)
+* [Cronjobs](#cronjobs)
+  * [Set up cron job to clean up logs](#set-up-cron-job-to-clean-up-logs)
+    * [Create cron action](#create-cron-action)
+  * [Set up cron job to update geodata artifacts](#set-up-cron-job-to-update-geodata-artifacts)
+    * [Add geodata-update script](#add-geodata-update-script)
+    * [Create cron action](#create-cron-action-1)
+  * [Add a new cron command available under OPNsense GUI](#add-a-new-cron-command-available-under-opnsense-gui)
+* [Forward requests to designated gateways](#forward-requests-to-designated-gateways)
+* [Appendix](#appendix)
+
+<!-- vim-markdown-toc -->
 
 ## Related Projects
 
