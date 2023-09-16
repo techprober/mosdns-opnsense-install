@@ -237,7 +237,7 @@ chmod +x /usr/local/etc/mosdns/scripts/geodata-update.sh
 Create a `.conf `file in `/usr/local/opnsense/service/conf/actions.d/` (your file must start with `actions_`)
 `vi /usr/local/opnsense/service/conf/actions.d/actions_mosdns-geodata-update.conf`
 
-Available in [./actions.d/actions_mosdns-logs-cleanup.conf](./actions.d/actions_mosdns-logs-cleanup.conf)
+Available in [./actions.d/actions_mosdns-geodata-update](./actions.d/actions_mosdns-geodata-update.conf)
 
 Restart and reload
 
