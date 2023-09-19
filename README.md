@@ -91,7 +91,7 @@ Make sure you have the following file structure present on your host:
 |-- scripts
 `-- ips
 
-5 directories, 2 files
+5 directories, 1 file
 ```
 
 Install Vim (Optional)
