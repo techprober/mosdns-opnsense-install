@@ -167,7 +167,7 @@ sudo chmod +x /usr/local/etc/rc.d/mosdns
 ```bash
 echo 'mosdns_enable="YES"' >> /etc/rc.conf
 service mosdns start
-service enable mosdns
+service mosdns enable
 ```
 
 ### Verify running status
