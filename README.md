@@ -31,27 +31,27 @@ Maintainer: [Kevin Yu (@yqlbu)](https://github.com/yqlbu)
 
 <!-- vim-markdown-toc GFM -->
 
-* [Related Projects](#related-projects)
-* [Steps to deploy](#steps-to-deploy)
-  * [Preparation](#preparation)
-  * [Download binary from GitHub release page](#download-binary-from-github-release-page)
-  * [Create log file](#create-log-file)
-  * [Download geodata artifacts](#download-geodata-artifacts)
-  * [Disable and stop Unbound service](#disable-and-stop-unbound-service)
-  * [Create mosdns rc service](#create-mosdns-rc-service)
-  * [Create mosdns config](#create-mosdns-config)
-  * [Enable mosdns service](#enable-mosdns-service)
-  * [Verify running status](#verify-running-status)
-  * [Check journal logs](#check-journal-logs)
-* [Cronjobs](#cronjobs)
-  * [Set up cron job to clean up logs](#set-up-cron-job-to-clean-up-logs)
-    * [Create cron action](#create-cron-action)
-  * [Set up cron job to update geodata artifacts](#set-up-cron-job-to-update-geodata-artifacts)
-    * [Add geodata-update script](#add-geodata-update-script)
-    * [Create cron action](#create-cron-action-1)
-  * [Add a new cron command available under OPNsense GUI](#add-a-new-cron-command-available-under-opnsense-gui)
-* [Forward requests to designated gateways](#forward-requests-to-designated-gateways)
-* [Appendix](#appendix)
+- [Related Projects](#related-projects)
+- [Steps to deploy](#steps-to-deploy)
+  - [Preparation](#preparation)
+  - [Download binary from GitHub release page](#download-binary-from-github-release-page)
+  - [Create log file](#create-log-file)
+  - [Download geodata artifacts](#download-geodata-artifacts)
+  - [Disable and stop Unbound service](#disable-and-stop-unbound-service)
+  - [Create mosdns rc service](#create-mosdns-rc-service)
+  - [Create mosdns config](#create-mosdns-config)
+  - [Enable mosdns service](#enable-mosdns-service)
+  - [Verify running status](#verify-running-status)
+  - [Check journal logs](#check-journal-logs)
+- [Cronjobs](#cronjobs)
+  - [Set up cron job to clean up logs](#set-up-cron-job-to-clean-up-logs)
+    - [Create cron action](#create-cron-action)
+  - [Set up cron job to update geodata artifacts](#set-up-cron-job-to-update-geodata-artifacts)
+    - [Add geodata-update script](#add-geodata-update-script)
+    - [Create cron action](#create-cron-action-1)
+  - [Add a new cron command available under OPNsense GUI](#add-a-new-cron-command-available-under-opnsense-gui)
+- [Forward requests to designated gateways](#forward-requests-to-designated-gateways)
+- [Appendix](#appendix)
 
 <!-- vim-markdown-toc -->
 
@@ -143,11 +143,11 @@ unzip -o $MOSDNS_PATH/downloads/geosite.zip -d $MOSDNS_PATH/domains
 > Doing so will free port `53` for mosdns to use
 
 ```bash
-/usr/local/sbin/pluginctl dns stop
-/usr/local/sbin/pluginctl dns disable
 # stop unbound service
 # /usr/local/opnsense/service/conf/actions.d/actions_unbound.conf
 configctl unbound stop
+/usr/local/sbin/pluginctl dns stop
+/usr/local/sbin/pluginctl dns disable
 ```
 
 ### Create mosdns rc service
