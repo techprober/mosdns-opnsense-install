@@ -37,7 +37,7 @@ Maintainer: [Kevin Yu (@yqlbu)](https://github.com/yqlbu)
   * [Download binary from GitHub release page](#download-binary-from-github-release-page)
   * [Create log file](#create-log-file)
   * [Download geodata artifacts](#download-geodata-artifacts)
-  * [Disable Unbound service](#disable-unbound-service)
+  * [Disable and stop Unbound service](#disable-and-stop-unbound-service)
   * [Create mosdns rc service](#create-mosdns-rc-service)
   * [Create mosdns config](#create-mosdns-config)
   * [Enable mosdns service](#enable-mosdns-service)
@@ -137,7 +137,7 @@ unzip -o $MOSDNS_PATH/downloads/geosite.zip -d $MOSDNS_PATH/domains
 > [!NOTE]
 > Alternatively, you may use a dedicated script to automatically download and extract the geodata artifacts. See [./scripts/geodata-update.sh](./scripts/geodata-update.sh)
 
-### Disable Unbound service
+### Disable and stop Unbound service
 
 > [!WARNING]
 > Doing so will free port `53` for mosdns to use
@@ -145,6 +145,9 @@ unzip -o $MOSDNS_PATH/downloads/geosite.zip -d $MOSDNS_PATH/domains
 ```bash
 /usr/local/sbin/pluginctl dns stop
 /usr/local/sbin/pluginctl dns disable
+# stop unbound service
+# /usr/local/opnsense/service/conf/actions.d/actions_unbound.conf
+configctl unbound stop
 ```
 
 ### Create mosdns rc service
