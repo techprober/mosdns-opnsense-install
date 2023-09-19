@@ -160,6 +160,9 @@ sudo chmod +x /usr/local/etc/rc.d/mosdns
 > [!NOTE]
 > You may start with the recommended [config](https://github.com/techprober/mosdns-lxc-deploy/blob/master/mosdns/config-v5.yml), which provides out-of-the-box ip leak prevent feature.
 
+> [!WARNING]
+> Please take a look at the content of `config-{VERSION}.yml` before you copy it to `/etc/mosdns`. It is a boilerplate template which intends to provide users a reference to start with customizing their own config.
+
 ### Enable mosdns service
 
 ```bash
