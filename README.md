@@ -77,8 +77,6 @@ Create sub directories
 
 ```bash
 sudo mkdir -p /usr/local/etc/mosdns/{ips,domains,downloads,custom}
-sudo touch /usr/local/etc/mosdns/cache.dump
-sudo chmod 0755 cache.dump
 ```
 
 Make sure you have the following file structure present on your host:
@@ -86,7 +84,6 @@ Make sure you have the following file structure present on your host:
 ```
 # /usr/local/etc/mosdns
 ./
-|-- cache.dump
 |-- config.yml
 |-- custom
 |-- domains
