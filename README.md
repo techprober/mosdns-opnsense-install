@@ -70,14 +70,15 @@ Maintainer: [Kevin Yu (@yqlbu)](https://github.com/yqlbu)
 Create a new directory for mosdns
 
 ```bash
-mkdir -p /etc/usr/local/mosdns
+sudo mkdir -p /etc/usr/local/mosdns
 ```
 
 Create sub directories
 
 ```bash
-mkdir -p /usr/local/etc/mosdns/{ips,domains,downloads,custom}
-touch /usr/local/etc/mosdns/cache.dump
+sudo mkdir -p /usr/local/etc/mosdns/{ips,domains,downloads,custom}
+sudo touch /usr/local/etc/mosdns/cache.dump
+sudo chmod 0755 cache.dump
 ```
 
 Make sure you have the following file structure present on your host:
@@ -116,7 +117,7 @@ sudo install -Dm755 mosdns /usr/bin/
 ### Create log file
 
 ```bash
-touch /var/log/mosdns.log
+sudo touch /var/log/mosdns.log
 ```
 
 ### Download geodata artifacts
@@ -166,15 +167,15 @@ sudo chmod +x /usr/local/etc/rc.d/mosdns
 
 ```bash
 echo 'mosdns_enable="YES"' >> /etc/rc.conf
-service mosdns start
-service mosdns enable
+sudo service mosdns start
+sudo service mosdns enable
 ```
 
 ### Verify running status
 
 ```bash
 ps -aux | grep mosdns
-service mosdns status
+sudo service mosdns status
 ```
 
 ### Check journal logs
@@ -208,8 +209,8 @@ Available in [./actions.d/actions_mosdns-logs-cleanup.conf](./actions.d/actions_
 Restart and reload
 
 ```bash
-service configd restart
-configctl mosdns-logs-cleanup reload
+sudo service configd restart
+sudo configctl mosdns-logs-cleanup reload
 ```
 
 ---
@@ -229,7 +230,7 @@ curl -L -o /usr/local/etc/mosdns/scripts/geodata-update.sh https://github.com/te
 Set permission
 
 ```bash
-chmod +x /usr/local/etc/mosdns/scripts/geodata-update.sh
+sudo chmod +x /usr/local/etc/mosdns/scripts/geodata-update.sh
 ```
 
 #### Create cron action
@@ -242,8 +243,8 @@ Available in [./actions.d/actions_mosdns-geodata-update](./actions.d/actions_mos
 Restart and reload
 
 ```bash
-service configd restart
-configctl mosdns-geodata-update reload
+sudo service configd restart
+sudo configctl mosdns-geodata-update reload
 ```
 
 ---
