@@ -31,27 +31,27 @@ Maintainer: [Kevin Yu (@yqlbu)](https://github.com/yqlbu)
 
 <!-- vim-markdown-toc GFM -->
 
-- [Related Projects](#related-projects)
-- [Steps to deploy](#steps-to-deploy)
-  - [Preparation](#preparation)
-  - [Download binary from GitHub release page](#download-binary-from-github-release-page)
-  - [Create log file](#create-log-file)
-  - [Download geodata artifacts](#download-geodata-artifacts)
-  - [Disable and stop Unbound service](#disable-and-stop-unbound-service)
-  - [Create mosdns rc service](#create-mosdns-rc-service)
-  - [Create mosdns config](#create-mosdns-config)
-  - [Enable mosdns service](#enable-mosdns-service)
-  - [Verify running status](#verify-running-status)
-  - [Check journal logs](#check-journal-logs)
-- [Cronjobs](#cronjobs)
-  - [Set up cron job to clean up logs](#set-up-cron-job-to-clean-up-logs)
-    - [Create cron action](#create-cron-action)
-  - [Set up cron job to update geodata artifacts](#set-up-cron-job-to-update-geodata-artifacts)
-    - [Add geodata-update script](#add-geodata-update-script)
-    - [Create cron action](#create-cron-action-1)
-  - [Add a new cron command available under OPNsense GUI](#add-a-new-cron-command-available-under-opnsense-gui)
-- [Forward requests to designated gateways](#forward-requests-to-designated-gateways)
-- [Appendix](#appendix)
+* [Related Projects](#related-projects)
+* [Steps to deploy](#steps-to-deploy)
+  * [Preparation](#preparation)
+  * [Download binary from GitHub release page](#download-binary-from-github-release-page)
+  * [Create log file](#create-log-file)
+  * [Download geodata artifacts](#download-geodata-artifacts)
+  * [Disable and stop Unbound service](#disable-and-stop-unbound-service)
+  * [Create mosdns rc service](#create-mosdns-rc-service)
+  * [Create mosdns config](#create-mosdns-config)
+  * [Enable mosdns service](#enable-mosdns-service)
+  * [Verify running status](#verify-running-status)
+  * [Check journal logs](#check-journal-logs)
+* [Cronjobs](#cronjobs)
+  * [Set up cron job to clean up logs](#set-up-cron-job-to-clean-up-logs)
+    * [Create cron action](#create-cron-action)
+  * [Set up cron job to update geodata artifacts](#set-up-cron-job-to-update-geodata-artifacts)
+    * [Add geodata-update script](#add-geodata-update-script)
+    * [Create cron action](#create-cron-action-1)
+  * [Add a new cron command available under OPNsense GUI](#add-a-new-cron-command-available-under-opnsense-gui)
+* [Forward requests to designated gateways](#forward-requests-to-designated-gateways)
+* [Appendix](#appendix)
 
 <!-- vim-markdown-toc -->
 
@@ -164,7 +164,7 @@ sudo chmod +x /usr/local/etc/rc.d/mosdns
 > You may start with the recommended [config](https://github.com/techprober/mosdns-lxc-deploy/blob/master/mosdns/config-v5.yml), which provides out-of-the-box ip leak prevent feature.
 
 > [!WARNING]
-> Please take a look at the content of `config-{VERSION}.yml` before you copy it to `/etc/mosdns`. It is a boilerplate template which intends to provide users a reference to start with customizing their own config.
+> Please take a look at the content of `config-{VERSION}.yml` before you copy it to `/usr/local/etc/mosdns`. It is a boilerplate template which intends to provide users a reference to start with customizing their own config.
 
 ### Enable mosdns service
 
