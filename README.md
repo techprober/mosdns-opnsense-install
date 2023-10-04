@@ -44,11 +44,10 @@ Maintainer: [Kevin Yu (@yqlbu)](https://github.com/yqlbu)
   * [Verify running status](#verify-running-status)
   * [Check journal logs](#check-journal-logs)
 * [Cronjobs](#cronjobs)
-  * [Set up cron job to clean up logs](#set-up-cron-job-to-clean-up-logs)
+  * [Set up cron job](#set-up-cron-job)
     * [Create cron action](#create-cron-action)
-  * [Set up cron job to update geodata artifacts](#set-up-cron-job-to-update-geodata-artifacts)
-    * [Add geodata-update script](#add-geodata-update-script)
-    * [Create cron action](#create-cron-action-1)
+    * [Clean up logs](#clean-up-logs)
+    * [Update geodata artifacts](#update-geodata-artifacts)
   * [Add a new cron command available under OPNsense GUI](#add-a-new-cron-command-available-under-opnsense-gui)
 * [Forward requests to designated gateways](#forward-requests-to-designated-gateways)
 * [Appendix](#appendix)
@@ -200,27 +199,32 @@ sudo tail -f /var/log/mosdns.log
 
 ## Cronjobs
 
-### Set up cron job to clean up logs
+### Set up cron job
 
 #### Create cron action
 
 Create a `.conf `file in `/usr/local/opnsense/service/conf/actions.d/` (your file must start with `actions_`)
 `vi /usr/local/opnsense/service/conf/actions.d/actions_mosdns-logs-cleanup.conf`
 
-Available in [./actions.d/actions_mosdns-logs-cleanup.conf](./actions.d/actions_mosdns-logs-cleanup.conf)
+Available in [./actions.d/actions_mosdns.conf](./actions.d/actions_mosdns.conf)
 
 Restart and reload
 
 ```bash
 sudo service configd restart
-sudo configctl mosdns-logs-cleanup reload
+```
+
+#### Clean up logs
+
+```bash
+sudo configctl mosdns logs-cleanup
 ```
 
 ---
 
-### Set up cron job to update geodata artifacts
+#### Update geodata artifacts
 
-#### Add geodata-update script
+Add geodata-update script
 
 The script is available in [./scripts/geodata-update.sh](./scripts/geodata-update.sh).
 
@@ -236,18 +240,10 @@ Set permission
 sudo chmod +x /usr/local/etc/mosdns/scripts/geodata-update.sh
 ```
 
-#### Create cron action
-
-Create a `.conf `file in `/usr/local/opnsense/service/conf/actions.d/` (your file must start with `actions_`)
-`vi /usr/local/opnsense/service/conf/actions.d/actions_mosdns-geodata-update.conf`
-
-Available in [./actions.d/actions_mosdns-geodata-update](./actions.d/actions_mosdns-geodata-update.conf)
-
-Restart and reload
+Run the action
 
 ```bash
-sudo service configd restart
-sudo configctl mosdns-geodata-update reload
+sudo configctl mosdns geodata-update
 ```
 
 ---
