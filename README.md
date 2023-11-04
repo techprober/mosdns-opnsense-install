@@ -50,6 +50,8 @@ Maintainer: [Kevin Yu (@yqlbu)](https://github.com/yqlbu)
     * [Update geodata artifacts](#update-geodata-artifacts)
   * [Add a new cron command available under OPNsense GUI](#add-a-new-cron-command-available-under-opnsense-gui)
 * [Forward requests to designated gateways](#forward-requests-to-designated-gateways)
+* [Maintenance](#maintenance)
+  * [Force stop mosdns](#force-stop-mosdns)
 * [Appendix](#appendix)
 
 <!-- vim-markdown-toc -->
@@ -261,6 +263,18 @@ You can show your cron command in dropdown Command. Plan your cron schedule as y
 > For those who would like to further forward DNS requests to designated gateways, depending on the DNS provider of choice, you may achieve so following the route setting below.
 
 ![CleanShot 2023-09-14 at 22 58 10@2x](https://github.com/techprober/mosdns-opnsense-install/assets/31861128/c681317c-ecd1-43a9-b441-8a56be95f6da)
+
+## Maintenance
+
+### Force stop mosdns
+
+```bash
+# force stop
+ps -aux | grep mosdns
+kill -9 <mosdns pid>
+# restart
+service mosdns start
+```
 
 ## Appendix
 
