@@ -27,7 +27,7 @@ Copyright 2023 @TechProber. All rights reserved.
 
 Maintainer: [Kevin Yu (@yqlbu)](https://github.com/yqlbu)
 
-## Table of contents
+## Table of Contents
 
 <!-- vim-markdown-toc GFM -->
 
