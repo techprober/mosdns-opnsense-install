@@ -23,7 +23,7 @@ Know DNS Providers: <https://adguard-dns.io/kb/general/dns-providers/>
 
 ## Project Owner
 
-Copyright 2023 @TechProber. All rights reserved.
+Copyright 2023-2024 @TechProber. All rights reserved.
 
 Maintainer: [Kevin Yu (@yqlbu)](https://github.com/yqlbu)
 
